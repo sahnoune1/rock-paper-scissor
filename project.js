@@ -1,111 +1,212 @@
-     
-function game() {
-    // the whole program
-    let a=0;
-    let b=0;
+// Hello.
+//
+// This is JSHint, a tool that helps to detect errors and potential
+// problems in your JavaScript code.
+//
+// To start, simply enter some JavaScript anywhere on this page. Your
+// report will appear on the right side.
+//
+// Additionally, you can toggle specific options in the Configure
+// menu.
 
-    for (let x = 0; x < 5; x++) { 
-        //  this loop will give us 5 rounds 
-
-// this is to call for the confirm function and let the magic happens 
-confirm();
-
-
-// this function sums the random choice and the compare function ,this where the magic Begins 
-// this is where we enter a value and see if we win or lose or tie with computer
-        function confirm() {
-              let seif=prompt("whats ur choice")
-            if (seif.toUpperCase()==="rock".toUpperCase() || seif.toUpperCase()==="paper".toUpperCase() || seif.toUpperCase()==="scissor".toUpperCase()) {
-              play (seif,getComputerChoice());
-              alert("player win rounds="+a +"\n"+" computer win rounds="+b);
-            } else { 
-              alert( "wrong answer");
-              confirm()
-            }
-        }
-
-// first function getcomputerchoice is to give a random value from the rock paper scissor list
-
-        function getComputerChoice () {
-            const list=["rock","paper","scissor"];
-        
-            const pick=list[Math.floor(Math.random()*list.length)];
-            return pick;    
-        
-        }
- 
-        
-// second function is to prepare for the game by writing a function that will do the comparaison 
-// between the value entered by the player and the random value chose n by the computer 
-// we use this function to compare when we enter a value 
-
-        function play (x,computer) {
-                 
-            if (x.toUpperCase()==="rock".toUpperCase()) {
-                if (computer.toUpperCase()==="rock".toUpperCase()) { 
-                return alert("tie")}
-                else if (computer.toUpperCase()==="scissor".toUpperCase()) {
-                    a=a+1
-                return alert ("u win")
-            }
-                else {
-                    b=b+1
-                return alert ("u lose")
-            } 
-            }
-            else if (x.toUpperCase()==="scissor".toUpperCase()) {
-                if (computer.toUpperCase()==="rock".toUpperCase()) {
-                    b=b+1
-                return alert ("u lose")
-             }
-                else if (computer.toUpperCase()==="paper".toUpperCase()) { 
-                    a=a+1
-                return alert ("u win") 
-            }
-                else {
-                return alert ("tie") }
-        
-            }
-            else if (x.toUpperCase()==="paper".toUpperCase()) {
-                if (computer.toUpperCase()==="rock".toUpperCase()) {
-                    a=a+1
-                return alert ("u win") 
-            }
-                else if (computer.toUpperCase()==="paper".toUpperCase()) { 
-                return alert ("tie") }
-                else {
-                    b=b+1
-                return alert ("u lose")
-            }                    
-            }
-            else { 
-                 alert("wrong")
-            }
-        }
-         
-   }   
+const btn1=document.createElement("button");
+btn1.textContent="rock";
+document.body.appendChild(btn1);
 
 
-if (a>b) { alert("player wins")}
-else if (a<b) { alert("computer wins")}
-else {alert ("its  a fucking tie ")}
+const btn2=document.createElement("button");
+btn2.textContent="paper";
+document.body.appendChild(btn2);
 
-}  
+
+const btn3=document.createElement("button");
+btn3.textContent="scissor"
+document.body.appendChild(btn3);
+
+
+const display=document.createElement("div");
+
+
+function getComputerChoice () {
+    const array=["rock","paper","scissor"];
+    const random=array[Math.floor(Math.random()*array.length)];
+    return (random);
     
-    game();
-//    to call for the whole program to begin  
-   
-    // var max_count = 5;
+}
 
-    // function showConfirm() {
-    //   var company = (prompt("What the name of the company that developed the javascript language?", ""));
-    //   if (company == 'netscape') {
-    //     alert("correct answer!");
-    //   } else {
-    //     alert("wrong answer");
-    //     // to limit user for limited count
-    //     if (--max_count > 0)
-    //       showConfirm()
-    //   }
-    // }
-    // showConfirm();
+function playOneRound(playerSelection,computerChoice) {
+    let log="";
+    if (playerSelection==="rock"){
+        if (computerChoice==="rock"){
+            log="its a tie";
+        }
+        else if (computerChoice==="paper"){
+            
+            log="you lose";
+        }
+        else if (computerChoice==="scissor"){
+                        
+            log="you win";
+        }
+    }
+    else if (playerSelection==="paper"){
+        if (computerChoice==="paper"){
+            log="its a tie";
+        }
+        else if (computerChoice==="scissor"){
+            
+            log="you lose";
+        }
+        else if (computerChoice==="rock"){
+            
+           log="you win";
+        }
+    }
+    else if (playerSelection==="scissor"){
+        if (computerChoice==="scissor"){
+            log="its a tie";
+        }
+        else if (computerChoice==="rock"){
+            
+           log="you lose";
+        }
+        else if (computerChoice==="paper"){
+            
+            log="you win";
+        }
+    }
+return (log);
+}
+
+
+
+
+
+let counter =0;
+let a=0;
+let b=0;
+
+
+
+
+
+    
+    
+    
+   
+    btn1.addEventListener("click", ()=> {
+        counter+=1;
+        
+        let select="rock";
+      let result= playOneRound(select,getComputerChoice ());
+     alert(result);
+     if(result==="you win"){
+        a+=1;
+     }
+     else if(result==="you lose"){
+        b+=1;
+     }
+     if (counter===5){
+        if(a>b){
+        alert("hahaha you win the game ");
+        counter=0;
+        a=0;
+        b=0;
+    }
+    else if(a<b){
+        alert("reallyµ?you lose");
+        counter=0;
+        a=0;
+        b=0;
+    }
+    else{
+        alert("well its a tie in the end");
+        counter=0;
+        a=0;
+        b=0;
+    }
+    
+    }
+    console.log(a);
+    console.log(b);
+    console.log(counter);
+
+    });
+    btn2.addEventListener("click", ()=> {
+        counter+=1;
+        let select="paper";
+       let result= playOneRound(select,getComputerChoice ());
+        alert(result);
+        if(result==="you win"){
+           a+=1;
+        }
+        else if(result==="you lose"){
+           b+=1;
+        }
+        if (counter===5){
+           if(a>b){
+           alert("hahaha you win the game ");
+           counter=0;
+           a=0;
+           b=0;
+       }
+       else if(a<b){
+           alert("reallyµ?you lose");
+           counter=0;
+           a=0;
+           b=0;
+       }
+       else{
+        alert("well its a tie in the end");
+        counter=0;
+        a=0;
+        b=0;
+    }
+       
+       }
+       console.log(a);
+    console.log(b);
+    console.log(counter);
+
+    });
+    btn3.addEventListener("click",() => {
+        counter+=1;
+        let select="scissor";
+      let result=  playOneRound(select,getComputerChoice ());
+        alert(result);
+        if(result==="you win"){
+           a+=1;
+        }
+        else if(result==="you lose"){
+           b+=1;
+        }
+        if (counter===5){
+           if(a>b){
+           alert("hahaha you win the game ");
+           counter=0;
+           a=0;
+           b=0;
+       }
+       else if(a<b){
+           alert("reallyµ?you lose");
+           counter=0;
+           a=0;
+           b=0;
+       }
+       else{
+        alert("well its a tie in the end");
+        counter=0;
+        a=0;
+        b=0;
+    }
+       
+       }
+       console.log(a);
+    console.log(b);
+    console.log(counter);
+
+
+    });
+  
+
+ 
